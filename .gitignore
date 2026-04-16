@@ -50,3 +50,9 @@ config.php
 # 📁 Uploads (caso crie futuramente)
 # =========================
 uploads/
+
+# =========================
+# 📄 Arquivos de backup de editores
+# =========================
+*.save
+
