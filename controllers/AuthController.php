@@ -2,6 +2,6 @@
 
 class AuthController {
     public function login() {
-        echo "Login controller funcionando";
+        require __DIR__ . '/../views/auth/login.php';
     }
 }
