@@ -1,12 +1,22 @@
 <?php
 
-$host = "localhost";
-$user = "phpuser";
-$pass = "senha123";
-$db   = "php002";
+class Database
+{
+    public static function connect()
+    {
+        $host = "localhost";
+        $dbname = "php002";
+        $user = "phpuser";
+        $pass = "senha123";
 
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
+        try {
+            return new PDO(
+                "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+                $user,
+                $pass
+            );
+        } catch (PDOException $e) {
+            die("Erro na conexão: " . $e->getMessage());
+        }
+    }
 }
