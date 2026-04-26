@@ -1,15 +1,22 @@
 <?php
 
+require_once __DIR__ . '/Database.php';
+
 class User
 {
-    public function authenticate($email, $senha)
+    public function authenticate($email, $password)
     {
-        // TEMPORÁRIO (simulação)
-        if ($email === 'admin@teste.com' && $senha === '123456') {
-            return [
-                'id' => 1,
-                'nome' => 'Administrador'
-            ];
+        $pdo = Database::connect();
+
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$email]);
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // comparação simples (temporária)
+        if ($user && $user['password'] === $password) {
+            return $user;
         }
 
         return false;
