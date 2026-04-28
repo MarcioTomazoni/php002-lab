@@ -56,12 +56,16 @@ class AuthController
 
         $success = $userModel->create($name, $email, $senha);
 
-        if ($success) {
-            header('Location: index.php?action=login');
-            exit;
-        }
+    if ($success === true) {
+        header('Location: index.php?action=login');
+        exit;
+    }
 
+    if ($success === 'email_exists') {
+        $erro = "Este e-mail já está cadastrado.";
+    } else {
         $erro = "Erro ao cadastrar usuário.";
+    }
     }
 
     require __DIR__ . '/../views/auth/register.php';
