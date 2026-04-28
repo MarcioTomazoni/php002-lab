@@ -26,12 +26,23 @@ class User
     {
         $pdo = Database::connect();
 
-        $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
+        try {
+            $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        return $stmt->execute([$name, $email, $hashedPassword]);
+            return $stmt->execute([$name, $email, $hashedPassword]);
+
+        } catch (PDOException $e) {
+
+            // Código 23000 = violação de constraint (UNIQUE)
+            if ($e->getCode() == 23000) {
+                return 'email_exists';
+            }
+
+            return false;
+        }
     }
 
 
