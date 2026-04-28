@@ -41,4 +41,30 @@ class AuthController
 
         require __DIR__ . '/../views/auth/dashboard.php';
     }
+
+    public function register()
+    {   
+    session_start();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $name  = $_POST['name'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $senha = $_POST['senha'] ?? '';
+
+        $userModel = new User();
+
+        $success = $userModel->create($name, $email, $senha);
+
+        if ($success) {
+            header('Location: index.php?action=login');
+            exit;
+        }
+
+        $erro = "Erro ao cadastrar usuário.";
+    }
+
+    require __DIR__ . '/../views/auth/register.php';
+    }
+
 }
