@@ -15,6 +15,10 @@ switch ($action) {
         $controller->dashboard();
         break;
 
+    case 'register':
+        $controller->register();
+        break;
+
     default:
         echo "Página não encontrada";
 }
