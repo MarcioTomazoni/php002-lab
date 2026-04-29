@@ -25,8 +25,9 @@ class AuthController
                 header('Location: index.php?action=dashboard');
                 exit;
             }
-
-            $erro = "Login inválido.";
+                setFlash('error', 'Login inválido.');
+                header('Location: index.php?action=login');
+                exit;
         }
 
         require __DIR__ . '/../views/auth/login.php';
