@@ -19,6 +19,10 @@ switch ($action) {
         $controller->register();
         break;
 
+    case 'logout':
+    $controller->logout();
+    break;
+
     default:
         echo "Página não encontrada";
 }
