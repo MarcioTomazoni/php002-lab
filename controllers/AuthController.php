@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../core/flash.php';
+
 require_once __DIR__ . '/../models/User.php';
 
 class AuthController
@@ -62,7 +64,7 @@ class AuthController
     }
 
     if ($success === 'email_exists') {
-        $erro = "Este e-mail já está cadastrado.";
+        setFlash('error', 'Este e-mail já está cadastrado.');
     } else {
         $erro = "Erro ao cadastrar usuário.";
     }
@@ -78,7 +80,7 @@ class AuthController
         session_unset();
         session_destroy();
     
-        header('Location: index.php?action=login');
+        setFlash('success', 'Usuário cadastrado com sucesso!');
         exit;
     }
 
