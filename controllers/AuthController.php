@@ -71,4 +71,15 @@ class AuthController
     require __DIR__ . '/../views/auth/register.php';
     }
 
+    public function logout()
+    {
+        session_start();
+    
+        session_unset();
+        session_destroy();
+    
+        header('Location: index.php?action=login');
+        exit;
+    }
+
 }
