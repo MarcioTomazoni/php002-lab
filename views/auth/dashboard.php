@@ -2,4 +2,4 @@
 
 <p>Bem-vindo, <?php echo $_SESSION['user_nome']; ?>!</p>
 
-<a href="index.php?action=login">Sair</a>
+<a href="index.php?action=logout">Sair</a>
